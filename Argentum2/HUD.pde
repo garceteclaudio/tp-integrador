@@ -5,5 +5,6 @@ class HUD{
   }
   public void mostrarPuntosDeVida(){
   }
-  public void mostrar
+  public void mostrar(){
+  }
 }
