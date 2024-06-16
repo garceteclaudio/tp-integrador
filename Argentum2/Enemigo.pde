@@ -9,7 +9,7 @@ class Enemigo extends GameObject implements IDisplayable, IMoveable {
   public Enemigo(PVector posicion) {
     objetoTransform = new Transform();
     objetoTransform.posicion = posicion;
-    this.colision = new Collider(30, 30, posicion);
+    this.colision = new Collider(Dimension.ANCHO, Dimension.ALTO, posicion);
     this.velocidad = PVector.random2D().mult(2); // Velocidad aleatoria inicial
     this.clickCount = 0; // Inicializar el contador de clicks
     this.lastClickTime = 0; // Inicializar el tiempo del último click
@@ -18,7 +18,7 @@ class Enemigo extends GameObject implements IDisplayable, IMoveable {
   @Override
   void dibujar() {
     fill(111, 22, 11);
-    rect(objetoTransform.posicion.x, objetoTransform.posicion.y, 30, 30);
+    rect(objetoTransform.posicion.x, objetoTransform.posicion.y,Dimension.ANCHO, Dimension.ALTO);
   }
 
   @Override

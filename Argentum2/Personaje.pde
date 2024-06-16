@@ -6,13 +6,13 @@ class Personaje extends GameObject implements IDisplayable, IMoveable {
   public Personaje(PVector posicion) {
     objetoTransform = new Transform();
     objetoTransform.posicion = posicion;
-    this.colision = new Collider(30, 30, posicion);
+    this.colision = new Collider(Dimension.ANCHO,Dimension.ALTO, posicion);
   }
 
   @Override
   void dibujar() {
     fill(22, 111, 222);
-    rect(objetoTransform.posicion.x, objetoTransform.posicion.y, 30, 30);
+    rect(objetoTransform.posicion.x, objetoTransform.posicion.y, Dimension.ANCHO, Dimension.ALTO);
   }
 
   @Override

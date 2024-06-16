@@ -2,8 +2,7 @@ class Pantalla {
   private Personaje p;
   private ArrayList<Enemigo> enemigos;
   private int estado;
-  private Enemigo enemigoSeleccionado; // Para almacenar el enemigo clickeado
-  
+
   void setEstado(int estado) {
     this.estado = estado;
   }
