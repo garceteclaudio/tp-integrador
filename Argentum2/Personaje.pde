@@ -37,13 +37,13 @@ class Personaje extends GameObject implements IDisplayable, IMoveable {
   // Método para manejar el movimiento del personaje con las teclas de flecha
   void moverConTeclado() {
     if (keyPressed) {
-      if (keyCode == UP) {
+      if (keyCode == UP || key == 'W' || key == 'w') {
         mover(0, -speed);  // Mover hacia arriba
-      } else if (keyCode == DOWN) {
+      } else if (keyCode == DOWN || key == 'S' || key == 's') {
         mover(0, speed);   // Mover hacia abajo
-      } else if (keyCode == LEFT) {
+      } else if (keyCode == LEFT || key == 'A' || key == 'a') {
         mover(-speed, 0);  // Mover hacia la izquierda
-      } else if (keyCode == RIGHT) {
+      } else if (keyCode == RIGHT || key == 'D' || key == 'd') {
         mover(speed, 0);   // Mover hacia la derecha
       }
     }

@@ -1,13 +1,18 @@
 class Enemigo extends GameObject implements IDisplayable, IMoveable {
   private Collider colision;
-  Transform objetoTransform;
-  PVector velocidad;
+  private Transform objetoTransform;
+  private PVector velocidad;
+  private int clickCount; // Contador de clicks
+  private long lastClickTime; // Tiempo del último click registrado
+  private static final long CLICK_COOLDOWN = 300; // Cooldown de 500 milisegundos
 
   public Enemigo(PVector posicion) {
     objetoTransform = new Transform();
     objetoTransform.posicion = posicion;
     this.colision = new Collider(30, 30, posicion);
     this.velocidad = PVector.random2D().mult(2); // Velocidad aleatoria inicial
+    this.clickCount = 0; // Inicializar el contador de clicks
+    this.lastClickTime = 0; // Inicializar el tiempo del último click
   }
 
   @Override
@@ -51,5 +56,22 @@ class Enemigo extends GameObject implements IDisplayable, IMoveable {
 
   public Collider getColision() {
     return this.colision;
+  }
+  
+    public void aumentarClickCount() {
+    clickCount++;
+  }
+
+  public int getClickCount() {
+    return clickCount;
+  }
+  
+    public boolean puedeRegistrarClick() {
+    long now = millis();
+    return (now - lastClickTime) >= CLICK_COOLDOWN;
+  }
+
+  public void registrarClick() {
+    lastClickTime = millis();
   }
 }

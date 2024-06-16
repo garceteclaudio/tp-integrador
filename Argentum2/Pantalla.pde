@@ -1,8 +1,17 @@
 class Pantalla {
   private Personaje p;
   private ArrayList<Enemigo> enemigos;
-  int estado;
+  private int estado;
+  private Enemigo enemigoSeleccionado; // Para almacenar el enemigo clickeado
+  
+  void setEstado(int estado) {
+    this.estado = estado;
+  }
 
+  int getEstado() {
+    return this.estado;
+  }
+  
   Pantalla() {
     this.estado = StateMachinePantallas.INTRO_JUEGO;
     p = new Personaje(new PVector(100, 100));
@@ -12,15 +21,9 @@ class Pantalla {
     for (int i = 0; i < 15; i++) {
       enemigos.add(new Enemigo(new PVector(random(width), random(height))));
     }
-  }
+  } // fin constructor
 
-  void setEstado(int estado) {
-    this.estado = estado;
-  }
 
-  int getEstado() {
-    return this.estado;
-  }
 
   void display() {
     switch (this.estado) {
@@ -58,6 +61,23 @@ class Pantalla {
           if (p.colisionaCon(enemigo.getColision())) {
             fill(255, 0, 0);
             text("Colisión ok", width / 2, 200);
+          }
+        }
+        
+        // Verificar clicks
+        if (mousePressed) {
+          for (Enemigo enemigo : enemigos) {
+            if (enemigo.getColision().validarColision(new Collider(1, 1, new PVector(mouseX, mouseY)))) {
+              if (enemigo.puedeRegistrarClick()) {
+                enemigo.registrarClick();
+                enemigo.aumentarClickCount();
+                print("Click numero" + enemigo.getClickCount()+ "\n");
+                if (enemigo.getClickCount() >= 5) {
+                  enemigos.remove(enemigo);
+                  break; // Salir del bucle una vez que se elimina el enemigo
+                }
+              }
+            }
           }
         }
 
