@@ -1,51 +1,56 @@
+
+
 class Personaje extends GameObject implements IDisplayable, IMoveable {
-  private Collider colision;
-  Transform objetoTransform;
-  float speed = 5;  // Velocidad de movimiento del personaje
+    private Collider colision;
+    private Transform objetoTransform;
+    private float speed = 5;  // Velocidad de movimiento del personaje
+    private ImageComponent imageComponent;
 
-  public Personaje(PVector posicion) {
-    objetoTransform = new Transform();
-    objetoTransform.posicion = posicion;
-    this.colision = new Collider(Dimension.ANCHO,Dimension.ALTO, posicion);
-  }
-
-  @Override
-  void dibujar() {
-    fill(22, 111, 222);
-    rect(objetoTransform.posicion.x, objetoTransform.posicion.y, Dimension.ANCHO, Dimension.ALTO);
-  }
-
-  @Override
-  void mover(float dx, float dy) {
-    objetoTransform.posicion.add(dx, dy);
-    this.colision.setPos(objetoTransform.posicion);
-  }
-
-  public boolean colisionaCon(Collider otroCollider) {
-    return this.colision.validarColision(otroCollider);
-  }
-
-  public void setPosicion(PVector posicion) {
-    objetoTransform.posicion = posicion;
-    this.colision.setPos(posicion);
-  }
-
-  public PVector getPosicion() {
-    return objetoTransform.posicion;
-  }
-
-  // Método para manejar el movimiento del personaje con las teclas de flecha
-  void moverConTeclado() {
-    if (keyPressed) {
-      if (keyCode == UP || key == 'W' || key == 'w') {
-        mover(0, -speed);  // Mover hacia arriba
-      } else if (keyCode == DOWN || key == 'S' || key == 's') {
-        mover(0, speed);   // Mover hacia abajo
-      } else if (keyCode == LEFT || key == 'A' || key == 'a') {
-        mover(-speed, 0);  // Mover hacia la izquierda
-      } else if (keyCode == RIGHT || key == 'D' || key == 'd') {
-        mover(speed, 0);   // Mover hacia la derecha
-      }
+    public Personaje(PVector posicion, String imagePath) {
+        objetoTransform = new Transform(posicion);
+        this.colision = new Collider(Dimension.ANCHO, Dimension.ALTO, posicion);
+        this.imageComponent = new ImageComponent(imagePath);
     }
-  }
+
+    @Override
+    void dibujar() {
+        // Mostrar la imagen del personaje en lugar del rectángulo
+        imageComponent.displayImage(objetoTransform.getPosition(), Dimension.ANCHO, Dimension.ALTO);
+    }
+
+    @Override
+    void mover(float dx, float dy) {
+        PVector nuevaPosicion = objetoTransform.getPosition().copy();
+        nuevaPosicion.add(dx, dy);
+        objetoTransform.setPosition(nuevaPosicion);
+        this.colision.setPos(objetoTransform.getPosition());
+    }
+
+    public boolean colisionaCon(Collider otroCollider) {
+        return this.colision.validarColision(otroCollider);
+    }
+
+    public void setPosicion(PVector posicion) {
+        objetoTransform.setPosition(posicion);
+        this.colision.setPos(posicion);
+    }
+
+    public PVector getPosicion() {
+        return objetoTransform.getPosition();
+    }
+
+    // Método para manejar el movimiento del personaje con las teclas de flecha
+    void moverConTeclado() {
+        if (keyPressed) {
+            if (keyCode == UP || key == 'W' || key == 'w') {
+                mover(0, -speed);  // Mover hacia arriba
+            } else if (keyCode == DOWN || key == 'S' || key == 's') {
+                mover(0, speed);   // Mover hacia abajo
+            } else if (keyCode == LEFT || key == 'A' || key == 'a') {
+                mover(-speed, 0);  // Mover hacia la izquierda
+            } else if (keyCode == RIGHT || key == 'D' || key == 'd') {
+                mover(speed, 0);   // Mover hacia la derecha
+            }
+        }
+    }
 }

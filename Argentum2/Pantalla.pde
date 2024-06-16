@@ -13,12 +13,12 @@ class Pantalla {
   
   Pantalla() {
     this.estado = StateMachinePantallas.INTRO_JUEGO;
-    p = new Personaje(new PVector(100, 100));
+    p = new Personaje(new PVector(100, 100), "mago.png");
     enemigos = new ArrayList<Enemigo>();
 
     // Crear 15 enemigos en posiciones aleatorias
-    for (int i = 0; i < 15; i++) {
-      enemigos.add(new Enemigo(new PVector(random(width), random(height))));
+    for (int i = 0; i < 5; i++) {
+      enemigos.add(new Enemigo(new PVector(random(width), random(height)), "zombie.png"));
     }
   } // fin constructor
 
