@@ -1,8 +1,17 @@
 class Pantalla {
+  private Personaje p;
+  private ArrayList<Enemigo> enemigos;
   int estado;
 
   Pantalla() {
     this.estado = StateMachinePantallas.INTRO_JUEGO;
+    p = new Personaje(new PVector(100, 100));
+    enemigos = new ArrayList<Enemigo>();
+
+    // Crear 15 enemigos en posiciones aleatorias
+    for (int i = 0; i < 15; i++) {
+      enemigos.add(new Enemigo(new PVector(random(width), random(height))));
+    }
   }
 
   void setEstado(int estado) {
@@ -29,12 +38,34 @@ class Pantalla {
         break;
 
       case StateMachinePantallas.JUGANDO: // 1
-        background(0, 0, 255);
+        background(0);
         fill(200);
         textSize(24);
-        text("Se encuentra jugando", width / 2, 150);
-        text("Presione 3 para derrota", width / 2, 190);
-        text("Presione 4 para victoria", width / 2, 230);
+        text("Se encuentra jugando", width / 2, 20);
+        text("Presione 3 para derrota", width / 2, 40);
+        text("Presione 4 para victoria", width / 2, 60);
+
+        // Mover el personaje con las teclas de flecha
+        p.moverConTeclado();
+
+        // Dibujar personaje
+        p.dibujar();
+
+        // Dibujar y actualizar enemigos
+        for (Enemigo enemigo : enemigos) {
+          enemigo.dibujar();
+          enemigo.actualizar();
+          if (p.colisionaCon(enemigo.getColision())) {
+            fill(255, 0, 0);
+            text("Colisión ok", width / 2, 200);
+          }
+        }
+
+        // Mostrar posición del personaje
+        fill(200);
+        textSize(24);
+        text("x: " + p.getPosicion().x, 500, 20);
+        text("y: " + p.getPosicion().y, 500, 50);
         break;
 
       case StateMachinePantallas.VICTORIA: // 2

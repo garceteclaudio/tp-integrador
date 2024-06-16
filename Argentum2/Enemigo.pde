@@ -1,7 +1,55 @@
-class Enemigo extends GameObject implements IDisplayable{
-  public Enemigo(){
+class Enemigo extends GameObject implements IDisplayable, IMoveable {
+  private Collider colision;
+  Transform objetoTransform;
+  PVector velocidad;
+
+  public Enemigo(PVector posicion) {
+    objetoTransform = new Transform();
+    objetoTransform.posicion = posicion;
+    this.colision = new Collider(30, 30, posicion);
+    this.velocidad = PVector.random2D().mult(2); // Velocidad aleatoria inicial
   }
-  
-  public void dibujar(){
+
+  @Override
+  void dibujar() {
+    fill(111, 22, 11);
+    rect(objetoTransform.posicion.x, objetoTransform.posicion.y, 30, 30);
+  }
+
+  @Override
+  void mover(float dx, float dy) {
+    objetoTransform.posicion.add(dx, dy);
+    this.colision.setPos(objetoTransform.posicion);
+  }
+
+  public void actualizar() {
+    objetoTransform.posicion.add(velocidad);
+
+    // Verificar bordes de la pantalla y cambiar dirección si es necesario
+    if (objetoTransform.posicion.x < 0 || objetoTransform.posicion.x > width - 30) {
+      velocidad.x *= -1;
+    }
+    if (objetoTransform.posicion.y < 0 || objetoTransform.posicion.y > height - 30) {
+      velocidad.y *= -1;
+    }
+    
+    this.colision.setPos(objetoTransform.posicion);
+  }
+
+  public boolean colisionaCon(Collider otroCollider) {
+    return this.colision.validarColision(otroCollider);
+  }
+
+  public void setPosicion(PVector posicion) {
+    objetoTransform.posicion = posicion;
+    this.colision.setPos(posicion);
+  }
+
+  public PVector getPosicion() {
+    return objetoTransform.posicion;
+  }
+
+  public Collider getColision() {
+    return this.colision;
   }
 }

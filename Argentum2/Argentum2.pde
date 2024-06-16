@@ -9,6 +9,8 @@ void setup() {
 
 void draw() {
   pantalla.display();
+  
+  
 }
 // Metodo que controla las distintas opciones del menu principal
 void mousePressed() {
