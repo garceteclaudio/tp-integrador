@@ -5,6 +5,7 @@ class Personaje extends GameObject implements IDisplayable, IMoveable {
     private Transform objetoTransform;
     private float speed = 5;  // Velocidad de movimiento del personaje
     private ImageComponent imageComponent;
+    private int cantVidas = 5;
 
     public Personaje(PVector posicion, String imagePath) {
         objetoTransform = new Transform(posicion);
@@ -38,7 +39,13 @@ class Personaje extends GameObject implements IDisplayable, IMoveable {
     public PVector getPosicion() {
         return objetoTransform.getPosition();
     }
+    public void setVidas(int vidas) {
+        this.cantVidas = vidas;
+    }
 
+    public int getVidas() {
+        return this.cantVidas;
+    }
     // Método para manejar el movimiento del personaje con las teclas de flecha
     void moverConTeclado() {
         if (keyPressed) {

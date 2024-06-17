@@ -81,10 +81,7 @@ class Pantalla {
         }
 
         // Mostrar posición del personaje
-        fill(200);
-        textSize(24);
-        text("x: " + p.getPosicion().x, 500, 20);
-        text("y: " + p.getPosicion().y, 500, 50);
+        mostrarPosicionPersonaje();
         break;
 
       case StateMachinePantallas.VICTORIA: // 2
@@ -104,4 +101,15 @@ class Pantalla {
         break;
     }
   }
-}
+  
+  void mostrarPosicionPersonaje(){
+        // Mostrar posición del personaje
+        fill(200);
+        textSize(24);
+        text("x: " + p.getPosicion().x, 650, 20);
+        text("y: " + p.getPosicion().y, 650, 50);  
+  }
+  
+  
+  
+}// FIN CLASE PANTALLA
