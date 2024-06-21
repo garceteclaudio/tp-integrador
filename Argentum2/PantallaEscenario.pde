@@ -7,7 +7,7 @@ class PantallaEscenario extends GameObject implements IDisplayable{
   Enemigo enemigoDragon;
   
   public PantallaEscenario(){
-    jugador = new Personaje(new PVector(100, 100), "/images/mago.png");
+    jugador = new Personaje(new PVector(100, 100), "/images/paladin.png");
     enemigos = new ArrayList<Enemigo>();
     for (int i = 0; i < 5; i++) {
       enemigos.add(new Enemigo(new PVector(random(width), random(height)), "/images/zombie.png"));
