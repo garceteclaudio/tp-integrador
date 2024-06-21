@@ -1,14 +1,12 @@
-
-
 class Personaje extends GameObject implements IDisplayable, IMoveable {
     private Collider colision;
     private Transform objetoTransform;
-    private float speed = 5;  // Velocidad de movimiento del personaje
+    private float speed = 10;  // Velocidad de movimiento del personaje
     private ImageComponent imageComponent;
     private int cantVidas = 5;
 
     public Personaje(PVector posicion, String imagePath) {
-        objetoTransform = new Transform(posicion);
+        this.objetoTransform = new Transform(posicion.x, posicion.y);
         this.colision = new Collider(Dimension.ANCHO, Dimension.ALTO, posicion);
         this.imageComponent = new ImageComponent(imagePath);
     }
@@ -21,18 +19,20 @@ class Personaje extends GameObject implements IDisplayable, IMoveable {
 
     @Override
     void mover(float dx, float dy) {
-        PVector nuevaPosicion = objetoTransform.getPosition().copy();
+        PVector nuevaPosicion = this.objetoTransform.getPosition();
         nuevaPosicion.add(dx, dy);
-        objetoTransform.setPosition(nuevaPosicion);
+        this.objetoTransform.setPosition(nuevaPosicion);
         this.colision.setPos(objetoTransform.getPosition());
     }
+    
+
 
     public boolean colisionaCon(Collider otroCollider) {
         return this.colision.validarColision(otroCollider);
     }
 
     public void setPosicion(PVector posicion) {
-        objetoTransform.setPosition(posicion);
+        this.objetoTransform.setPosition(posicion);
         this.colision.setPos(posicion);
     }
 
