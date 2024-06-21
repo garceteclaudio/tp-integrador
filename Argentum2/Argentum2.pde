@@ -2,13 +2,15 @@ private Pantalla pantalla;
 private StateMachinePantallas stateMachine;
 
 void setup() {
-  size(600, 600);
+  size(800, 600);
   pantalla = new Pantalla();
   stateMachine = new StateMachinePantallas(pantalla);
 }
 
 void draw() {
   pantalla.display();
+  
+  
 }
 // Metodo que controla las distintas opciones del menu principal
 void mousePressed() {

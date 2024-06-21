@@ -9,6 +9,7 @@ class StateMachinePantallas {
     this.pantalla = p;
   }
 
+// Metodo utilizado para cambiar las distintas pantallas
   void changeStateOpcion(int newState) {
     pantalla.setEstado(newState);
   }
