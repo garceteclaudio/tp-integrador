@@ -1,10 +1,10 @@
-class PantallaDerrota extends GameObject implements IDisplayable{
+class PantallaDerrota extends GameObject implements IVisualizable{
 
     public PantallaDerrota(){
 
     }
 
-    public void dibujar(){
+    public void display(){
         background(240, 46, 143);
         fill(200);
         textSize(24);

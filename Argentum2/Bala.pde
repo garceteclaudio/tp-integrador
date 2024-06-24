@@ -1,4 +1,4 @@
-class Bala implements IDisplayable{
+class Bala implements IVisualizable{
   public PVector posicion;
   public float velocidad;
   public PVector direccion;
@@ -9,7 +9,7 @@ class Bala implements IDisplayable{
     //this.colision = new Collider(Dimension.ANCHO, Dimension.ALTO, posicion);
   }
   
-  public void dibujar(){
+  public void display(){
     fill(0,0,255);
     rect(this.posicion.x,this.posicion.y,60,60);
   }

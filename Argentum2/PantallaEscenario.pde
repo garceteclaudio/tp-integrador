@@ -1,4 +1,4 @@
-class PantallaEscenario extends GameObject implements IDisplayable{
+class PantallaEscenario extends GameObject implements IVisualizable{
   
   private Personaje jugador;
   private ArrayList<Enemigo> enemigos;
@@ -28,7 +28,7 @@ class PantallaEscenario extends GameObject implements IDisplayable{
     }
   }
 
-  public void dibujar(){
+  public void display(){
         background(0);
         fill(200);
         textSize(24);
@@ -40,9 +40,9 @@ class PantallaEscenario extends GameObject implements IDisplayable{
         //float deltaTime = Time.getDeltaTime(frameRate);
 
         jugador.moverConTeclado();
-        jugador.dibujar();
+        jugador.display();
         
-        enemigoDragon.dibujar();
+        enemigoDragon.display();
         enemigoDragon.actualizar();
         if (jugador.colisionaCon(enemigoDragon.getColision())) {
             fill(255, 0, 0);
@@ -66,7 +66,7 @@ class PantallaEscenario extends GameObject implements IDisplayable{
          
         // Dibujar y actualizar enemigos
         for (Enemigo enemigo : enemigos) {
-          enemigo.dibujar();
+          enemigo.display();
           enemigo.actualizar();
           if (jugador.colisionaCon(enemigo.getColision())) {
             fill(255, 0, 0);
@@ -96,7 +96,7 @@ class PantallaEscenario extends GameObject implements IDisplayable{
         mostrarPosicionPersonaje();
         
         if(b!=null){
-          b.dibujar();
+          b.display();
           b.mover();
         }
         // falta ver colision con enemigoDragon

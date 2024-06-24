@@ -1,35 +1,35 @@
-class Pantalla implements IDisplayable{
+class Pantalla implements IVisualizable{
   private int estado;
   private PantallaEscenario escenario;
-  private InicioPantalla inicioPantalla;
+  private PantallaInicio inicioPantalla;
   private PantallaDerrota pantallaDerrota;
   private PantallaVictoria pantallaVictoria;
 
   Pantalla() {
     this.estado = StateMachinePantallas.INTRO_JUEGO;
     escenario = new PantallaEscenario();
-    inicioPantalla = new InicioPantalla();
+    inicioPantalla = new PantallaInicio();
     pantallaDerrota = new PantallaDerrota();
     pantallaVictoria = new PantallaVictoria();
   } // fin constructor
   
 
-  void dibujar() {
+  void display() {
     switch (this.estado) {
       case StateMachinePantallas.INTRO_JUEGO: // 0
-        inicioPantalla.dibujar();
+        inicioPantalla.display();
         break;
 
       case StateMachinePantallas.JUGANDO: // 1
-        escenario.dibujar();
+        escenario.display();
         break;
 
       case StateMachinePantallas.VICTORIA: // 2
-        pantallaVictoria.dibujar();
+        pantallaVictoria.display();
         break;
 
       case StateMachinePantallas.DERROTA: // 3
-        pantallaDerrota.dibujar();
+        pantallaDerrota.display();
         break;
     }
   }//fin dibujar

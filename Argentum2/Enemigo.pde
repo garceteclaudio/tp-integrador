@@ -1,6 +1,6 @@
 
 
-class Enemigo extends GameObject implements IDisplayable, IMoveable {
+class Enemigo extends GameObject implements IVisualizable, IMoveable {
     private Collider colision;
     private Transform objetoTransform;
     private PVector velocidad;
@@ -19,7 +19,7 @@ class Enemigo extends GameObject implements IDisplayable, IMoveable {
     }
 
     @Override
-    void dibujar() {
+    void display() {
         // Mostrar la imagen del enemigo en lugar del rectángulo
         imageComponent.displayImage(objetoTransform.getPosition(), Dimension.ANCHO, Dimension.ALTO);
     }

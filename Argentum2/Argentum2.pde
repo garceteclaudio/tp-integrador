@@ -11,7 +11,7 @@ void setup() {
 }
 
 void draw() {
-  pantalla.dibujar();
+  pantalla.display();
 }
 
 // Metodo que controla las distintas opciones del menu principal

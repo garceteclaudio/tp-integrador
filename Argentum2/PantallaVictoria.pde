@@ -1,10 +1,10 @@
-class PantallaVictoria extends GameObject implements IDisplayable{
+class PantallaVictoria extends GameObject implements IVisualizable{
 
     public PantallaVictoria(){
 
     }
 
-    public void dibujar(){
+    public void display(){
         background(205, 211, 43);
         fill(0);
         textSize(24);

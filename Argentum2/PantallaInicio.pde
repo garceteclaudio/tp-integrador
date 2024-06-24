@@ -1,11 +1,11 @@
-class InicioPantalla implements IDisplayable{
+class PantallaInicio implements IVisualizable{
 
-    public InicioPantalla(){
+    public PantallaInicio(){
 
 
     }
 
-    public void dibujar(){
+    public void display(){
         background(58, 116, 46);
         textSize(32);
         fill(0);

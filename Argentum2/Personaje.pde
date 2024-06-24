@@ -1,4 +1,4 @@
-class Personaje extends GameObject implements IDisplayable, IMoveable {
+class Personaje extends GameObject implements IVisualizable, IMoveable {
     private Collider colision;
     private Transform objetoTransform;
     private float speed = 10;  // Velocidad de movimiento del personaje
@@ -12,7 +12,7 @@ class Personaje extends GameObject implements IDisplayable, IMoveable {
     }
 
     @Override
-    void dibujar() {
+    void display() {
         // Mostrar la imagen del personaje en lugar del rectángulo
         imageComponent.displayImage(objetoTransform.getPosition(), Dimension.ANCHO, Dimension.ALTO);
     }

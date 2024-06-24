@@ -1,7 +1,7 @@
-class Arbol extends GameObject implements IDisplayable{
+class Arbol extends GameObject implements IVisualizable{
   public Arbol(){
   }
   
-  public void dibujar(){
+  public void display(){
   }
 }
