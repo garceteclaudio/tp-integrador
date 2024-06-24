@@ -1,16 +1,16 @@
 
 
-class Enemigo extends GameObject implements IDisplayable, IMoveable {
+class Enemigo extends GameObject implements IVisualizable, IMoveable {
     private Collider colision;
     private Transform objetoTransform;
     private PVector velocidad;
     private int clickCount; // Contador de clicks
     private long lastClickTime; // Tiempo del último click registrado
-    private static final long CLICK_COOLDOWN = 300; // Cooldown de 300 milisegundos
+    private static final long CLICK_COOLDOWN = 100; // Cooldown de 150 milisegundos
     private ImageComponent imageComponent;
 
     public Enemigo(PVector posicion, String imagePath) {
-        objetoTransform = new Transform(posicion);
+        objetoTransform = new Transform(posicion.x, posicion.y);
         this.colision = new Collider(Dimension.ANCHO, Dimension.ALTO, posicion);
         this.velocidad = PVector.random2D().mult(2); // Velocidad aleatoria inicial
         this.clickCount = 0; // Inicializar el contador de clicks
@@ -19,7 +19,7 @@ class Enemigo extends GameObject implements IDisplayable, IMoveable {
     }
 
     @Override
-    void dibujar() {
+    void display() {
         // Mostrar la imagen del enemigo en lugar del rectángulo
         imageComponent.displayImage(objetoTransform.getPosition(), Dimension.ANCHO, Dimension.ALTO);
     }

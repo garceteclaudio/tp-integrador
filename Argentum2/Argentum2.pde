@@ -1,17 +1,19 @@
 private Pantalla pantalla;
 private StateMachinePantallas stateMachine;
+private PantallaEscenario escenario;
 
 void setup() {
   size(800, 600);
   pantalla = new Pantalla();
   stateMachine = new StateMachinePantallas(pantalla);
+  escenario = new PantallaEscenario();
+  frameRate(60);
 }
 
 void draw() {
   pantalla.display();
-  
-  
 }
+
 // Metodo que controla las distintas opciones del menu principal
 void mousePressed() {
   if (pantalla.getEstado() == StateMachinePantallas.INTRO_JUEGO) {
@@ -38,4 +40,8 @@ void keyPressed() {
       stateMachine.changeStateOpcion(StateMachinePantallas.INTRO_JUEGO);
     }
   }
+}
+
+void keyReleased() {
+  pantalla.keyReleased();
 }
