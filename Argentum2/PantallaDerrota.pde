@@ -1,4 +1,4 @@
-class PantallaDerrota extends GameObject implements IVisualizable{
+class PantallaDerrota implements IVisualizable{
 
     public PantallaDerrota(){
 

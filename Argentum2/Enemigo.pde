@@ -1,6 +1,6 @@
 
 
-class Enemigo extends GameObject implements IVisualizable, IMoveable {
+class Enemigo implements IVisualizable, IMoveable {
     private Collider colision;
     private Transform objetoTransform;
     private PVector velocidad;

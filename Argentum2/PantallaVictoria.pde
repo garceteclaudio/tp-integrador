@@ -1,4 +1,4 @@
-class PantallaVictoria extends GameObject implements IVisualizable{
+class PantallaVictoria implements IVisualizable{
 
     public PantallaVictoria(){
 

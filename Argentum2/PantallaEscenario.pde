@@ -1,4 +1,4 @@
-class PantallaEscenario extends GameObject implements IVisualizable {
+class PantallaEscenario implements IVisualizable {
   private PImage fondo;
   private Personaje jugador;
   private ArrayList<Enemigo> enemigos;

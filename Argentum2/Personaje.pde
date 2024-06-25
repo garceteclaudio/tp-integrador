@@ -1,4 +1,4 @@
-class Personaje extends GameObject implements IVisualizable, IMoveable {
+class Personaje implements IVisualizable, IMoveable {
     private Collider colision;
     private Transform objetoTransform;
     private float speed = 10;  // Velocidad de movimiento del personaje
