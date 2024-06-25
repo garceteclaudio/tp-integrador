@@ -6,23 +6,23 @@ class PantallaEscenario extends GameObject implements IVisualizable {
   Enemigo enemigoDragon;
 
   public PantallaEscenario() {
-    fondo = loadImage("/images/fondo2.jpg");
+    fondo = loadImage("/resources/images/fondo2.jpg");
 
-    jugador = new Personaje(new PVector(100, 100), "/images/mago.png");
+    jugador = new Personaje(new PVector(100, 100), "/resources/images/mago.png");
     enemigos = new ArrayList<Enemigo>();
     for (int i = 0; i < 3; i++) {
-      enemigos.add(new Enemigo(new PVector(random(width), random(height)), "/images/zombie3.png"));
+      enemigos.add(new Enemigo(new PVector(random(width), random(height)), "/resources/images/zombie3.png"));
     }
     for (int i = 0; i < 3; i++) {
-      enemigos.add(new Enemigo(new PVector(random(width), random(height)), "/images/zombie2.png"));
+      enemigos.add(new Enemigo(new PVector(random(width), random(height)), "/resources/images/zombie2.png"));
     }
-
     for (int i = 0; i < 3; i++) {
-      enemigos.add(new Enemigo(new PVector(random(width), random(height)), "/images/zombie.png"));
+      enemigos.add(new Enemigo(new PVector(random(width), random(height)), "/resources/images/zombie.png"));
     }
+    
     explosiones = new ArrayList<>();
      
-    enemigoDragon = new Enemigo(new PVector(random(width), random(height)), "/images/dragon.png");
+    enemigoDragon = new Enemigo(new PVector(random(width), random(height)), "/resources/images/dragon.png");
   }
 
   void dibujarExplosiones() {
