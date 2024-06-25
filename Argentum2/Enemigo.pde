@@ -32,10 +32,12 @@ class Enemigo extends GameObject implements IVisualizable, IMoveable {
         this.colision.setPos(objetoTransform.getPosition());
     }
 
+    /*
+        Operacion utilizada para generar el movimiento del enemigo.
+    */
     public void actualizar() {
         objetoTransform.getPosition().add(velocidad);
 
-        // Verificar bordes de la pantalla y cambiar dirección si es necesario
         if (objetoTransform.getPosition().x < 0 || objetoTransform.getPosition().x > width - Dimension.ANCHO) {
             velocidad.x *= -1;
         }
@@ -46,6 +48,9 @@ class Enemigo extends GameObject implements IVisualizable, IMoveable {
         this.colision.setPos(objetoTransform.getPosition());
     }
 
+    /*
+        Operacion utilizada para detectar colisiones.
+    */
     public boolean colisionaCon(Collider otroCollider) {
         return this.colision.validarColision(otroCollider);
     }

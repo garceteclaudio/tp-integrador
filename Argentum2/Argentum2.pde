@@ -3,7 +3,7 @@ private StateMachinePantallas stateMachine;
 private PantallaEscenario escenario;
 
 void setup() {
-  size(800, 600);
+  size(900, 700);
   pantalla = new Pantalla();
   stateMachine = new StateMachinePantallas(pantalla);
   escenario = new PantallaEscenario();
@@ -14,7 +14,10 @@ void draw() {
   pantalla.display();
 }
 
-// Metodo que controla las distintas opciones del menu principal
+
+/*
+  Operacion utilizada para seleccionar las opciones del menu inicial.
+*/
 void mousePressed() {
   if (pantalla.getEstado() == StateMachinePantallas.INTRO_JUEGO) {
     if (mouseY > 180 && mouseY < 220 && mouseX > width / 2 - 100 && mouseX < width / 2 + 100) {
@@ -27,7 +30,9 @@ void mousePressed() {
   }
 }
 
-// metodo de prueba de tarnsiciones de pantalla
+/*
+  Operacion de prueba de las distintas pantallas del juego.
+*/
 void keyPressed() {
   if (pantalla.getEstado() == StateMachinePantallas.JUGANDO) {
     if (key == '3') {

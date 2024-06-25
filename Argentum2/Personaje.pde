@@ -13,7 +13,6 @@ class Personaje extends GameObject implements IVisualizable, IMoveable {
 
     @Override
     void display() {
-        // Mostrar la imagen del personaje en lugar del rectángulo
         imageComponent.displayImage(objetoTransform.getPosition(), Dimension.ANCHO, Dimension.ALTO);
     }
 
@@ -26,7 +25,9 @@ class Personaje extends GameObject implements IVisualizable, IMoveable {
     }
     
 
-
+    /*
+        Operacion utilizada para detectar colisiones.
+    */
     public boolean colisionaCon(Collider otroCollider) {
         return this.colision.validarColision(otroCollider);
     }
@@ -46,7 +47,10 @@ class Personaje extends GameObject implements IVisualizable, IMoveable {
     public int getVidas() {
         return this.cantVidas;
     }
-    // Método para manejar el movimiento del personaje con las teclas de flecha
+
+    /*
+        Operacion utilizada para el control del personaje mediante teclas.
+    */
     void moverConTeclado() {
         if (keyPressed) {
             if (keyCode == UP || key == 'W' || key == 'w') {

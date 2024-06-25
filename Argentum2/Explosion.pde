@@ -6,10 +6,10 @@ class Explosion {
   private int yFrame;      //posición y del Frame
   private int cantFrames;    //la cantidad de veces que se mostrarán frames
   private int contFrames;    //contador de frames visualizados
-  private int posicionX;
-  private int posicionY;
+  private float posicionX;
+  private float posicionY;
 
-  public Explosion(int posicionX, int posicionY) {
+  public Explosion(float posicionX, float posicionY) {
     sprite = requestImage("/resources/images/explosion.png");
     widthFrame = 64;
     heightFrame = 64;

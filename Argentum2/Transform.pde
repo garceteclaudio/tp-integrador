@@ -1,6 +1,3 @@
-
-
-// Clase Transform
 class Transform {
   private PVector position;
 
