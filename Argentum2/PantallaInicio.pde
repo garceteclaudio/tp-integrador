@@ -1,11 +1,11 @@
-class PantallaInicio implements IVisualizable{
+class PantallaInicio extends Pantalla{
 
-    public PantallaInicio(){
-
+    public PantallaInicio(int estado){
+      super(estado);
 
     }
 
-    public void display(){
+    public void visualizar(){
         background(58, 116, 46);
         textSize(32);
         fill(0);

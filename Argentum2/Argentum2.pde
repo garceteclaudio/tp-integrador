@@ -1,52 +1,39 @@
 private Pantalla pantalla;
-private StateMachinePantallas stateMachine;
-private PantallaEscenario escenario;
+private MaquinaDeEstadosPantallas maquinaDeEStados;
 
 void setup() {
   size(900, 700);
-  pantalla = new Pantalla();
-  stateMachine = new StateMachinePantallas(pantalla);
-  escenario = new PantallaEscenario();
+  maquinaDeEStados = new MaquinaDeEstadosPantallas();
+  pantalla = maquinaDeEStados.cambiarEstado(MaquinaDeEstadosPantallas.INICIO, pantalla);
   frameRate(60);
 }
 
 void draw() {
-  pantalla.display();
+  // metodo polimorfico
+  pantalla.visualizar();
 }
 
-
-/*
-  Operacion utilizada para seleccionar las opciones del menu inicial.
-*/
 void mousePressed() {
-  if (pantalla.getEstado() == StateMachinePantallas.INTRO_JUEGO) {
+  // SELECCIONO LA PANTALLA DONDE SE APLICA mouseX...
+  if (pantalla.estado == MaquinaDeEstadosPantallas.INICIO) { 
     if (mouseY > 180 && mouseY < 220 && mouseX > width / 2 - 100 && mouseX < width / 2 + 100) {
-      stateMachine.changeStateOpcion(StateMachinePantallas.JUGANDO);
+      pantalla = maquinaDeEStados.cambiarEstado(MaquinaDeEstadosPantallas.JUGANDO, pantalla);
     } else if (mouseY > 230 && mouseY < 270 && mouseX > width / 2 - 100 && mouseX < width / 2 + 100) {
-      stateMachine.changeStateOpcion(StateMachinePantallas.VICTORIA);
+      pantalla = maquinaDeEStados.cambiarEstado(MaquinaDeEstadosPantallas.VICTORIA, pantalla);
     } else if (mouseY > 280 && mouseY < 320 && mouseX > width / 2 - 100 && mouseX < width / 2 + 100) {
       exit();
     }
   }
 }
 
-/*
-  Operacion de prueba de las distintas pantallas del juego.
-*/
-void keyPressed() {
-  if (pantalla.getEstado() == StateMachinePantallas.JUGANDO) {
-    if (key == '3') {
-      stateMachine.changeStateOpcion(StateMachinePantallas.DERROTA);
-    } else if (key == '4') {
-      stateMachine.changeStateOpcion(StateMachinePantallas.VICTORIA);
-    }
-  } else if (pantalla.getEstado() == StateMachinePantallas.VICTORIA || pantalla.getEstado() == StateMachinePantallas.DERROTA) {
-    if (key == '1') {
-      stateMachine.changeStateOpcion(StateMachinePantallas.INTRO_JUEGO);
-    }
-  }
-}
-
 void keyReleased() {
-  pantalla.keyReleased();
+  if (key=='3'){
+    pantalla = maquinaDeEStados.cambiarEstado(MaquinaDeEstadosPantallas.DERROTA, pantalla);
+  }
+  if (key=='4'){
+    pantalla = maquinaDeEStados.cambiarEstado(MaquinaDeEstadosPantallas.VICTORIA, pantalla);
+  }
+  if (key=='1'){
+    pantalla = maquinaDeEStados.cambiarEstado(MaquinaDeEstadosPantallas.INICIO, pantalla);
+  }
 }

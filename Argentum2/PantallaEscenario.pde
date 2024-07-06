@@ -1,11 +1,12 @@
-class PantallaEscenario implements IVisualizable {
+class PantallaEscenario extends Pantalla{
   private PImage fondo;
   private Personaje jugador;
   private ArrayList<Enemigo> enemigos;
   ArrayList<Explosion> explosiones;
   Enemigo enemigoDragon;
 
-  public PantallaEscenario() {
+  public PantallaEscenario(int estado) {
+    super(estado);
     fondo = loadImage("/resources/images/fondo2.jpg");
 
     jugador = new Personaje(new PVector(100, 100), "/resources/images/mago.png");
@@ -32,7 +33,7 @@ class PantallaEscenario implements IVisualizable {
     }
   }
 
-  public void display() {
+  public void visualizar() {
     background(fondo);
     fill(200);
     textSize(24);
