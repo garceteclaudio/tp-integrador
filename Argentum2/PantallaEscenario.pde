@@ -1,12 +1,14 @@
-class PantallaEscenario extends Pantalla{
+class PantallaEscenario extends Pantalla {
   private PImage fondo;
   private Personaje jugador;
   private ArrayList<Enemigo> enemigos;
   ArrayList<Explosion> explosiones;
   Enemigo enemigoDragon;
+  private int startTime;
 
   public PantallaEscenario(int estado) {
     super(estado);
+    startTime = millis(); // Tiempo de inicio en milisegundos
     fondo = loadImage("/resources/images/fondo2.jpg");
 
     jugador = new Personaje(new PVector(100, 100), "/resources/images/mago.png");
@@ -22,7 +24,6 @@ class PantallaEscenario extends Pantalla{
     }
     
     explosiones = new ArrayList<>();
-     
     enemigoDragon = new Enemigo(new PVector(random(width), random(height)), "/resources/images/dragon.png");
   }
 
@@ -32,9 +33,34 @@ class PantallaEscenario extends Pantalla{
       e.display();
     }
   }
+  
+  void mostrarPosicionPersonaje() {
+    fill(200);
+    textSize(24);
+    text("x: " + jugador.getPosicion().x, 650, 20);
+    text("y: " + jugador.getPosicion().y, 650, 50);
+  }
 
   public void visualizar() {
+    int elapsedTime = millis() - startTime; // Tiempo transcurrido en milisegundos
+    int remainingTime = 60000 - elapsedTime; // 60 segundos menos el tiempo transcurrido
+  
+    
     background(fondo);
+    
+    fill(200);
+    textAlign(CENTER);
+    textSize(20);
+    text("Tiempo restante de juego: " + remainingTime / 1000, 130, 30);
+
+    if (remainingTime <= 0) {
+      
+      // Arreglar
+      //pantalla = MaquinaDeEstadosPantallas.cambiarEstado(MaquinaDeEstadosPantallas.GAME_OVER, pantalla);
+      return; // No ejecutar más código si el tiempo se ha agotado
+    }
+    
+    
     fill(200);
     textSize(24);
     text("Se encuentra jugando", width / 2, 20);
@@ -100,20 +126,8 @@ class PantallaEscenario extends Pantalla{
       }
     }
 
-    // Dibujar explosiones
     dibujarExplosiones();
-
-    // Mostrar posición del personaje
     mostrarPosicionPersonaje();
-
-
-  }
-
-  void mostrarPosicionPersonaje() {
-    fill(200);
-    textSize(24);
-    text("x: " + jugador.getPosicion().x, 650, 20);
-    text("y: " + jugador.getPosicion().y, 650, 50);
   }
 
   // Si presiono la tecla espacio se lanza el proyectil

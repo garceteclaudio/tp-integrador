@@ -14,7 +14,6 @@ void draw() {
 }
 
 void mousePressed() {
-  // SELECCIONO LA PANTALLA DONDE SE APLICA mouseX...
   if (pantalla.estado == MaquinaDeEstadosPantallas.INICIO) { 
     if (mouseY > 180 && mouseY < 220 && mouseX > width / 2 - 100 && mouseX < width / 2 + 100) {
       pantalla = maquinaDeEStados.cambiarEstado(MaquinaDeEstadosPantallas.JUGANDO, pantalla);
