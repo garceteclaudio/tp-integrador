@@ -36,4 +36,4 @@ class Explosion implements IVisualizable{
       }
     }
   }
-}
+}// fin clase Explosion
