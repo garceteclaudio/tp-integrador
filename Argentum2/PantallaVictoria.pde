@@ -1,10 +1,10 @@
-class PantallaVictoria implements IVisualizable{
+class PantallaVictoria extends Pantalla{
 
-    public PantallaVictoria(){
-
+    public PantallaVictoria(int estado){
+      super(estado);
     }
 
-    public void display(){
+    public void visualizar(){
         background(205, 211, 43);
         fill(0);
         textSize(24);

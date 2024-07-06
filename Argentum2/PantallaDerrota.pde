@@ -1,10 +1,10 @@
-class PantallaDerrota implements IVisualizable{
+class PantallaDerrota extends Pantalla{
 
-    public PantallaDerrota(){
-
+    public PantallaDerrota(int estado){
+      super(estado);
     }
 
-    public void display(){
+    public void visualizar(){
         background(240, 46, 143);
         fill(200);
         textSize(24);

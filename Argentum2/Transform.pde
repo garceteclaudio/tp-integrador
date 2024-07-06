@@ -5,16 +5,16 @@ class Transform {
     this.position = new PVector(x, y);
   }
 
+  public void mover(float dx, float dy) {
+    this.position.add(dx, dy);
+  }
+
   public PVector getPosition() {
     return this.position;
   }
 
   public void setPosition(PVector position) {
     this.position = position;
-  }
-
-  public void mover(float dx, float dy) {
-    this.position.add(dx, dy);
   }
 
   public float getX() {

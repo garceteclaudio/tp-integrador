@@ -6,7 +6,7 @@ class Enemigo implements IVisualizable, IMoveable {
     private PVector velocidad;
     private int clickCount; // Contador de clicks
     private long lastClickTime; // Tiempo del último click registrado
-    private static final long CLICK_COOLDOWN = 100; // Cooldown de 150 milisegundos
+    private static final long CLICK_COOLDOWN = 100; // Cooldown de 100 milisegundos
     private ImageComponent imageComponent;
 
     public Enemigo(PVector posicion, String imagePath) {

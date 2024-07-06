@@ -1,4 +1,4 @@
-class Explosion {
+class Explosion implements IVisualizable{
   private PImage sprite;
   private int widthFrame;    //ancho del Frame
   private int heightFrame;   //alto del Frame
@@ -20,7 +20,8 @@ class Explosion {
     this.posicionX = posicionX;
     this.posicionY = posicionY;
   }
-
+  
+  @Override
   public void display() {
     imageMode(CENTER);
     if (contFrames <= cantFrames) {
