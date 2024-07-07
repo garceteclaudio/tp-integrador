@@ -3,7 +3,7 @@ class Personaje implements IVisualizable, IMoveable {
     private Transform objetoTransform;
     private float speed = 300;  // Velocidad de movimiento del personaje
     private ImageComponent imageComponent;
-    private int cantVidas = 200;
+    private int cantVidas = 140;
     private int puntaje = 0;
 
     public Personaje(PVector posicion, String imagePath) {

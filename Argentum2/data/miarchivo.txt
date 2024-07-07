@@ -1,4 +1,2 @@
-Puntaje: 35
-Puntaje: 50
-Puntaje: 0
-Puntaje: 150
+Puntaje: 10
+Puntaje: 175
