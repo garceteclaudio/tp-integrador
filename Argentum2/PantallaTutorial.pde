@@ -6,7 +6,7 @@ class PantallaTutorial extends Pantalla{
       fondo = loadImage("/resources/images/pantallatutorial.png");
     }
 
-    public void visualizar(){
+    public void visualizar(float deltaTime){
         background(fondo);
     }
 

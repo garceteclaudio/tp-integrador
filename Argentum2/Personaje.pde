@@ -1,7 +1,7 @@
 class Personaje implements IVisualizable, IMoveable {
     private Collider colision;
     private Transform objetoTransform;
-    private float speed = 10;  // Velocidad de movimiento del personaje
+    private float speed = 300;  // Velocidad de movimiento del personaje
     private ImageComponent imageComponent;
     private int cantVidas = 200;
     private int puntaje = 0;
@@ -75,16 +75,16 @@ class Personaje implements IVisualizable, IMoveable {
     /*
         Operacion utilizada para el control del personaje mediante teclas.
     */
-    void moverConTeclado() {
+    void moverConTeclado(float deltaTime) {
         if (keyPressed) {
             if (keyCode == UP || key == 'W' || key == 'w') {
-                mover(0, -speed);  // Mover hacia arriba
+                mover(0, -speed*deltaTime);  // Mover hacia arriba
             } else if (keyCode == DOWN || key == 'S' || key == 's') {
-                mover(0, speed);   // Mover hacia abajo
+                mover(0, speed*deltaTime);   // Mover hacia abajo
             } else if (keyCode == LEFT || key == 'A' || key == 'a') {
-                mover(-speed, 0);  // Mover hacia la izquierda
+                mover(-speed*deltaTime, 0);  // Mover hacia la izquierda
             } else if (keyCode == RIGHT || key == 'D' || key == 'd') {
-                mover(speed, 0);   // Mover hacia la derecha
+                mover(speed*deltaTime, 0);   // Mover hacia la derecha
             }
         }
 

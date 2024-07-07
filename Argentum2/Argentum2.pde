@@ -6,19 +6,18 @@ void setup() {
     size(900, 700);
     maquinaDeEstados = new MaquinaDeEstadosPantallas();
     pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.INICIO, pantalla);
-    frameRate(60);
+    
 }
 
 void draw() {
+    float deltaTime = Time.getDeltaTime(frameRate);
     // metodo polimorfico
-    pantalla.visualizar();
-    println("Posición del mouse - X: " + mouseX + ", Y: " + mouseY);
+    pantalla.visualizar(deltaTime);
+    //println("Posición del mouse - X: " + mouseX + ", Y: " + mouseY);
+    frameRate(40);
 }
 
 void mousePressed() {
-  
- 
-  
     if (pantalla.estado == MaquinaDeEstadosPantallas.INICIO) { 
         if (mouseY > 211 && mouseY < 245 && mouseX > 360 && mouseX < 560) {
             pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.TUTORIAL, pantalla);

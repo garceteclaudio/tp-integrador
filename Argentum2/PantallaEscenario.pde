@@ -50,7 +50,7 @@ class PantallaEscenario extends Pantalla {
         }
     }
 
-    public void visualizar() {
+    public void visualizar(float deltaTime) {
         int elapsedTime = millis() - startTime; // Tiempo transcurrido en milisegundos
         int remainingTime = 35000 - elapsedTime; // 45 segundos menos el tiempo transcurrido
         if (remainingTime <= 0) {
@@ -66,13 +66,13 @@ class PantallaEscenario extends Pantalla {
         hud.mostrarPosicionPersonaje();
 
         jugador.display();
-        jugador.moverConTeclado();
+        jugador.moverConTeclado(deltaTime);
 
         // Dibujar y actualizar enemigos
         for (int i = enemigos.size() - 1; i >= 0; i--) {
             Enemigo enemigo = enemigos.get(i);
             enemigo.display();
-            enemigo.actualizar();
+            enemigo.actualizar(deltaTime*70);
             if (jugador.colisionaCon(enemigo.getColision())) {
                 jugador.disminuirVidas();
                 fill(255, 0, 0);

@@ -4,7 +4,7 @@ class PantallaVictoria extends Pantalla{
       super(estado);
     }
 
-    public void visualizar(){
+    public void visualizar(float deltaTime){
         background(205, 211, 43);
         fill(0);
         textSize(24);

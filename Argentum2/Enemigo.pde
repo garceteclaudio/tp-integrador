@@ -1,5 +1,3 @@
-
-
 class Enemigo implements IVisualizable, IMoveable {
     private Collider colision;
     private Transform objetoTransform;
@@ -35,8 +33,9 @@ class Enemigo implements IVisualizable, IMoveable {
     /*
         Operacion utilizada para generar el movimiento del enemigo.
     */
-    public void actualizar() {
-        objetoTransform.getPosition().add(velocidad);
+    public void actualizar(float deltaTime) {
+        PVector movement = velocidad.copy().mult(deltaTime);
+        mover(movement.x, movement.y);
 
         if (objetoTransform.getPosition().x < 0 || objetoTransform.getPosition().x > width - Dimension.ANCHO) {
             velocidad.x *= -1;
@@ -47,6 +46,9 @@ class Enemigo implements IVisualizable, IMoveable {
 
         this.colision.setPos(objetoTransform.getPosition());
     }
+
+
+
 
     /*
         Operacion utilizada para detectar colisiones.

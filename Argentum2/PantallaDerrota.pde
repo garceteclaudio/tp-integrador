@@ -5,7 +5,7 @@ class PantallaDerrota extends Pantalla {
         super(estado);
     }
 
-    public void visualizar() {
+    public void visualizar(float deltaTime) {
         background(240, 46, 143);
         fill(200);
         textSize(24);

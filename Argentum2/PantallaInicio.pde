@@ -7,7 +7,7 @@ class PantallaInicio extends Pantalla{
 
     }
 
-  public void visualizar(){
+  public void visualizar(float deltaTime){
       background(fondo);
       
       fill(255); // Color blanco para el texto

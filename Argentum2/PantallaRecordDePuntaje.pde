@@ -10,7 +10,7 @@ class PantallaRecordDePuntaje extends Pantalla {
         puntajes = readAndSortPuntajes("data/miarchivo.txt");
     }
 
-    public void visualizar() {
+    public void visualizar(float deltaTime) {
         background(240, 46, 143);
         fill(200);
         textSize(24);
