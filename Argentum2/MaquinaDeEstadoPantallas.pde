@@ -1,34 +1,23 @@
-public class MaquinaDeEstadosPantallas  {
-  public static final int INICIO = 1;
-  public static final int JUGANDO = 2;
-  public static final int VICTORIA = 3;
-  public static final int DERROTA = 4;
+class MaquinaDeEstadosPantallas {
+    static final int INICIO = 0;
+    static final int JUGANDO = 1;
+    static final int VICTORIA = 2;
+    static final int DERROTA = 3;
+    static final int TUTORIAL = 4;
 
-
-// Metodo utilizado para cambiar las distintas pantallas
-  public  Pantalla cambiarEstado(int estado, Pantalla p) {
-    switch (estado){
-      case 1: {
-        p = new PantallaInicio(estado);
-        p.estado = INICIO;
-        break;
-      }
-      case 2: {
-        p = new PantallaEscenario(estado);
-        p.estado = JUGANDO;
-        break;
-      }
-      case 3: {
-        p = new PantallaVictoria(estado);
-        p.estado = VICTORIA;
-        break;
-      }
-      case 4: {
-        p = new PantallaDerrota(estado);
-        p.estado = DERROTA;
-        break;
-      }
+    public Pantalla cambiarEstado(int nuevoEstado, Pantalla pantallaActual) {
+        switch (nuevoEstado) {
+            case 0:
+                return new PantallaInicio(INICIO);
+            case 1:
+                return new PantallaEscenario(JUGANDO, this);
+            case 2:
+                return new PantallaVictoria(VICTORIA);
+            case 3:
+                return new PantallaDerrota(DERROTA);
+            case 4:
+                return new PantallaTutorial(TUTORIAL);
+        }
+        return pantallaActual;
     }
-    return p;
-  }// fin funciona cambiarEstado
-}//Fin MaquinaDeEstadosPantallas
+}

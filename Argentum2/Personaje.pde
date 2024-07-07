@@ -3,7 +3,8 @@ class Personaje implements IVisualizable, IMoveable {
     private Transform objetoTransform;
     private float speed = 10;  // Velocidad de movimiento del personaje
     private ImageComponent imageComponent;
-    private int cantVidas = 5;
+    private int cantVidas = 200;
+    private int puntaje = 0;
 
     public Personaje(PVector posicion, String imagePath) {
         this.objetoTransform = new Transform(posicion.x, posicion.y);
@@ -48,6 +49,22 @@ class Personaje implements IVisualizable, IMoveable {
         return this.cantVidas;
     }
 
+    public void disminuirVidas(){
+        this.cantVidas--;
+    }
+
+    
+    public int getPuntaje() {
+        return this.puntaje;
+    }
+
+    public void sumarPuntaje(){
+        this.puntaje = this.puntaje + 10;
+    }
+
+    public void sumarPuntajeMoneda(){
+        this.puntaje = this.puntaje + 25;
+    }
     /*
         Operacion utilizada para el control del personaje mediante teclas.
     */
