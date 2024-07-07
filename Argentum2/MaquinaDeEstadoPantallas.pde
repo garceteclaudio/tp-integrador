@@ -4,6 +4,7 @@ class MaquinaDeEstadosPantallas {
     static final int VICTORIA = 2;
     static final int DERROTA = 3;
     static final int TUTORIAL = 4;
+    static final int PUNTAJES = 5;
 
     public Pantalla cambiarEstado(int nuevoEstado, Pantalla pantallaActual) {
         switch (nuevoEstado) {
@@ -17,6 +18,8 @@ class MaquinaDeEstadosPantallas {
                 return new PantallaDerrota(DERROTA);
             case 4:
                 return new PantallaTutorial(TUTORIAL);
+            case 5:
+                return new PantallaRecordDePuntaje(PUNTAJES);
         }
         return pantallaActual;
     }

@@ -19,7 +19,7 @@ void mousePressed() {
         if (mouseY > 180 && mouseY < 220 && mouseX > width / 2 - 100 && mouseX < width / 2 + 100) {
             pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.TUTORIAL, pantalla);
         } else if (mouseY > 230 && mouseY < 270 && mouseX > width / 2 - 100 && mouseX < width / 2 + 100) {
-            pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.VICTORIA, pantalla);
+            pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.PUNTAJES, pantalla);
         } else if (mouseY > 280 && mouseY < 320 && mouseX > width / 2 - 100 && mouseX < width / 2 + 100) {
             exit();
         }

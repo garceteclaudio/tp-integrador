@@ -1,0 +1,5 @@
+Puntaje: 35
+Puntaje: 70
+Puntaje: 70
+Puntaje: 45
+Puntaje: 0

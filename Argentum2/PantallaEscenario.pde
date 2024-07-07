@@ -1,4 +1,7 @@
+import java.io.*;
+
 class PantallaEscenario extends Pantalla {
+    ArrayList<String> lineas = new ArrayList<String>();
     private PImage fondo;
     private ArrayList<Moneda> monedas;
     private Personaje jugador;
@@ -35,6 +38,9 @@ class PantallaEscenario extends Pantalla {
         }
 
         explosiones = new ArrayList<>();
+
+        // Leer puntajes previos al inicio del juego
+        lineas = readArrayListFromFile("data/miarchivo.txt");
     }
 
     void dibujarExplosiones() {
@@ -49,6 +55,8 @@ class PantallaEscenario extends Pantalla {
         int remainingTime = 35000 - elapsedTime; // 45 segundos menos el tiempo transcurrido
         if (remainingTime <= 0) {
             pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.DERROTA, pantalla);
+            lineas.add("Puntaje: " + jugador.getPuntaje());
+            saveArrayListToFile(lineas, "data/miarchivo.txt");
             return; // No ejecutar más código si el tiempo se ha agotado
         }
 
@@ -57,7 +65,6 @@ class PantallaEscenario extends Pantalla {
         hud.visualizarInformacionDeJuego(remainingTime);
         hud.mostrarPosicionPersonaje();
 
-        
         jugador.display();
         jugador.moverConTeclado();
 
@@ -71,6 +78,8 @@ class PantallaEscenario extends Pantalla {
                 fill(255, 0, 0);
                 if (jugador.getVidas() <= 0) {
                     pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.DERROTA, pantalla);
+                    lineas.add("Puntaje: " + jugador.getPuntaje());
+                    saveArrayListToFile(lineas, "data/miarchivo.txt");
                     return;
                 }
             }
@@ -109,6 +118,30 @@ class PantallaEscenario extends Pantalla {
         }
         
         dibujarExplosiones();
+    }
+
+    void saveArrayListToFile(ArrayList<String> arrayList, String fileName) {
+        PrintWriter output = createWriter(fileName);
+        for (String linea : arrayList) {
+            output.println(linea);
+        }
+        output.flush();
+        output.close();
+    }
+
+    ArrayList<String> readArrayListFromFile(String fileName) {
+        ArrayList<String> arrayList = new ArrayList<String>();
+        BufferedReader reader = createReader(fileName);
+        String linea;
+        try {
+            while ((linea = reader.readLine()) != null) {
+                arrayList.add(linea);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return arrayList;
     }
 
     void keyReleased() {
