@@ -3,7 +3,7 @@ class PantallaTutorial extends Pantalla{
 
     public PantallaTutorial(int estado){
       super(estado);
-      fondo = loadImage("/resources/images/tutorial.png");
+      fondo = loadImage("/resources/images/pantallatutorial.png");
     }
 
     public void visualizar(){

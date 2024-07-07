@@ -12,15 +12,19 @@ void setup() {
 void draw() {
     // metodo polimorfico
     pantalla.visualizar();
+    println("Posición del mouse - X: " + mouseX + ", Y: " + mouseY);
 }
 
 void mousePressed() {
+  
+ 
+  
     if (pantalla.estado == MaquinaDeEstadosPantallas.INICIO) { 
-        if (mouseY > 180 && mouseY < 220 && mouseX > width / 2 - 100 && mouseX < width / 2 + 100) {
+        if (mouseY > 211 && mouseY < 245 && mouseX > 360 && mouseX < 560) {
             pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.TUTORIAL, pantalla);
-        } else if (mouseY > 230 && mouseY < 270 && mouseX > width / 2 - 100 && mouseX < width / 2 + 100) {
+        } else if (mouseY > 274 && mouseY < 305 && mouseX > 262 && mouseX < 652) {
             pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.PUNTAJES, pantalla);
-        } else if (mouseY > 280 && mouseY < 320 && mouseX > width / 2 - 100 && mouseX < width / 2 + 100) {
+        } else if (mouseY > 336 && mouseY < 363 && mouseX > 379 && mouseX < 538) {
             exit();
         }
     }
