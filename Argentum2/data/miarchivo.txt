@@ -3,3 +3,5 @@ Puntaje: 70
 Puntaje: 70
 Puntaje: 45
 Puntaje: 0
+Puntaje: 130
+Puntaje: 60

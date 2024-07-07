@@ -2,12 +2,12 @@ import java.io.*;
 import java.util.*;
 
 class PantallaRecordDePuntaje extends Pantalla {
-    private ArrayList<String> puntajes;
+    private ArrayList<Puntaje> puntajes;
 
     public PantallaRecordDePuntaje(int estado) {
         super(estado);
-        // Leer puntajes desde el archivo
-        puntajes = readArrayListFromFile("data/miarchivo.txt");
+        // Leer puntajes desde el archivo y ordenarlos
+        puntajes = readAndSortPuntajes("data/miarchivo.txt");
     }
 
     public void visualizar() {
@@ -21,24 +21,44 @@ class PantallaRecordDePuntaje extends Pantalla {
         // Mostrar todos los puntajes
         textSize(18);
         float y = 230;
-        for (String puntaje : puntajes) {
-            text(puntaje, width / 2, y);
+        for (Puntaje puntaje : puntajes) {
+            text(puntaje.texto, width / 2, y);
             y += 30; // Incrementar la posición Y para el siguiente puntaje
         }
     }
 
-    ArrayList<String> readArrayListFromFile(String fileName) {
-        ArrayList<String> arrayList = new ArrayList<String>();
+    ArrayList<Puntaje> readAndSortPuntajes(String fileName) {
+        ArrayList<Puntaje> arrayList = new ArrayList<Puntaje>();
         BufferedReader reader = createReader(fileName);
         String linea;
         try {
             while ((linea = reader.readLine()) != null) {
-                arrayList.add(linea);
+                String[] parts = linea.split(": ");
+                if (parts.length == 2) {
+                    try {
+                        int valor = Integer.parseInt(parts[1].trim());
+                        arrayList.add(new Puntaje(linea, valor));
+                    } catch (NumberFormatException e) {
+                        // Ignorar líneas que no tengan un formato válido
+                    }
+                }
             }
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // Ordenar los puntajes de mayor a menor
+        Collections.sort(arrayList, (p1, p2) -> Integer.compare(p2.valor, p1.valor));
         return arrayList;
+    }
+
+    class Puntaje {
+        String texto;
+        int valor;
+
+        Puntaje(String texto, int valor) {
+            this.texto = texto;
+            this.valor = valor;
+        }
     }
 }
