@@ -4,7 +4,7 @@ class PantallaDerrota extends Pantalla {
 
     public PantallaDerrota(int estado) {
         super(estado);
-        fondo = loadImage("/resources/images/pantalla-derrota.jpg");
+        fondo = loadImage("/resources/images/pantalla-derrota2.jpg");
     }
 
     public void visualizar(float deltaTime) {
@@ -12,7 +12,7 @@ class PantallaDerrota extends Pantalla {
         fill(255);
         textSize(45);
         textAlign(CENTER);
-        text("Derrota.", width / 2, 150);
-        text("Presione 1 para intro juego", width / 2, 200);
+        text("Has sido derrotado.", width / 2, 100);
+        text("Presione 1 para intro juego", width / 2, 150);
     }
 }

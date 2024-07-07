@@ -3,23 +3,25 @@ import java.util.*;
 
 class PantallaRecordDePuntaje extends Pantalla {
     private ArrayList<Puntaje> puntajes;
+    private PImage fondo;
 
     public PantallaRecordDePuntaje(int estado) {
         super(estado);
         // Leer puntajes desde el archivo y ordenarlos
         puntajes = readAndSortPuntajes("data/miarchivo.txt");
+        fondo = loadImage("/resources/images/pantalla-puntajes.jpg");
     }
 
     public void visualizar(float deltaTime) {
-        background(240, 46, 143);
-        fill(200);
-        textSize(24);
+        background(fondo);
+        fill(255);
+        textSize(45);
         textAlign(CENTER);
         text("Puntajes: ", width / 2, 150);
         text("Presione 1 para volver a la pantalla principal.", width / 2, 190);
 
         // Mostrar todos los puntajes
-        textSize(18);
+        textSize(40);
         float y = 230;
         for (Puntaje puntaje : puntajes) {
             text(puntaje.texto, width / 2, y);
