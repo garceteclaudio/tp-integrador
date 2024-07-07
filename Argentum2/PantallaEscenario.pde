@@ -3,7 +3,7 @@ class PantallaEscenario extends Pantalla {
     private ArrayList<Moneda> monedas;
     private Personaje jugador;
     private ArrayList<Enemigo> enemigos;
-    ArrayList<Explosion> explosiones;
+    private ArrayList<Explosion> explosiones;
     private int startTime;
     private MaquinaDeEstadosPantallas maquinaDeEstados;
     private Hud hud;
@@ -44,8 +44,6 @@ class PantallaEscenario extends Pantalla {
         }
     }
 
-
-
     public void visualizar() {
         int elapsedTime = millis() - startTime; // Tiempo transcurrido en milisegundos
         int remainingTime = 35000 - elapsedTime; // 45 segundos menos el tiempo transcurrido
@@ -59,9 +57,9 @@ class PantallaEscenario extends Pantalla {
         hud.visualizarInformacionDeJuego(remainingTime);
         hud.mostrarPosicionPersonaje();
 
-        jugador.moverConTeclado();
+        
         jugador.display();
-
+        jugador.moverConTeclado();
 
         // Dibujar y actualizar enemigos
         for (int i = enemigos.size() - 1; i >= 0; i--) {
@@ -71,18 +69,16 @@ class PantallaEscenario extends Pantalla {
             if (jugador.colisionaCon(enemigo.getColision())) {
                 jugador.disminuirVidas();
                 fill(255, 0, 0);
-                //text("Colisión ok", width / 2, 200);
                 if (jugador.getVidas() <= 0) {
                     pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.DERROTA, pantalla);
-                    return; // Detener la ejecución si el jugador ha perdido todas las vidas
+                    return;
                 }
             }
-            // Mostrar cantidad de clics restantes sobre el enemigo
             fill(200);
             textSize(16);
             textAlign(CENTER);
             text("Vidas: " + (5 - enemigo.getClickCount()), enemigo.getPosicion().x, enemigo.getPosicion().y - 30);
-        } // fin for
+        }
 
         // Verificar clicks sobre enemigos
         if (mousePressed) {
@@ -92,8 +88,6 @@ class PantallaEscenario extends Pantalla {
                     if (enemigo.puedeRegistrarClick()) {
                         enemigo.registrarClick();
                         enemigo.aumentarClickCount();
-                        print("Click numero" + enemigo.getClickCount() + "\n");
-                        // Crear una nueva explosión en la posición del enemigo clicado
                         explosiones.add(new Explosion(enemigo.getPosicion().x, enemigo.getPosicion().y));
                         if (enemigo.getClickCount() >= 5) {
                             enemigos.remove(i);
@@ -112,13 +106,11 @@ class PantallaEscenario extends Pantalla {
                 monedas.remove(i);
                 jugador.sumarPuntajeMoneda();
             }
-        } // fin for
+        }
         
-        //mostrarPosicionPersonaje();
         dibujarExplosiones();
     }
 
-    // Si presiono la tecla espacio se lanza el proyectil
     void keyReleased() {
         if (key == ' ') {
             print("Se pulso espacio");

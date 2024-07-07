@@ -6,7 +6,7 @@ class Moneda implements IVisualizable {
 
     public Moneda(PVector posicion, String imagePath){
         this.objetoTransform = new Transform(posicion.x, posicion.y);
-        this.colision = new Collider(Dimension.ANCHO, Dimension.ALTO, posicion);
+        this.colision = new Collider(40, 40, posicion);
         this.imageComponent = new ImageComponent(imagePath);
     }
 
@@ -16,7 +16,7 @@ class Moneda implements IVisualizable {
 
     @Override
     void display() {
-        imageComponent.displayImage(objetoTransform.getPosition(), Dimension.ANCHO, Dimension.ALTO);
+        imageComponent.displayImage(objetoTransform.getPosition(), 40, 40);
     }
     
     public Collider getColision() {

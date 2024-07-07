@@ -65,6 +65,13 @@ class Personaje implements IVisualizable, IMoveable {
     public void sumarPuntajeMoneda(){
         this.puntaje = this.puntaje + 25;
     }
+
+    public int getAncho() {
+        return Dimension.ANCHO;
+    }
+    public int getAltura() {
+        return Dimension.ALTO;
+    }
     /*
         Operacion utilizada para el control del personaje mediante teclas.
     */
@@ -80,5 +87,9 @@ class Personaje implements IVisualizable, IMoveable {
                 mover(speed, 0);   // Mover hacia la derecha
             }
         }
+
+        // Limitar posición del jugador dentro de la pantalla
+        this.getPosicion().x = constrain(this.getPosicion().x, 0, 900 - this.getAncho());
+        this.getPosicion().y = constrain(this.getPosicion().y, 0, 700 - this.getAltura());
     }
 }
