@@ -6,6 +6,7 @@ class PantallaEscenario extends Pantalla {
     ArrayList<Explosion> explosiones;
     private int startTime;
     private MaquinaDeEstadosPantallas maquinaDeEstados;
+    private Hud hud;
 
     public PantallaEscenario(int estado, MaquinaDeEstadosPantallas maquinaDeEstados) {
         super(estado);
@@ -13,9 +14,10 @@ class PantallaEscenario extends Pantalla {
         startTime = millis(); // Tiempo de inicio en milisegundos
         fondo = loadImage("/resources/images/fondo2.jpg");
 
-
         jugador = new Personaje(new PVector(100, 100), "/resources/images/mago.png");
-
+        
+        hud = new Hud(jugador);
+        
         monedas = new ArrayList<Moneda>();
         for (int i = 0; i < 7; i++) {
             monedas.add(new Moneda(new PVector(random(width), random(height)), "/resources/images/oro.png"));
@@ -42,12 +44,7 @@ class PantallaEscenario extends Pantalla {
         }
     }
 
-    void mostrarPosicionPersonaje() {
-        fill(200);
-        textSize(24);
-        text("x: " + jugador.getPosicion().x, 650, 20);
-        text("y: " + jugador.getPosicion().y, 650, 50);
-    }
+
 
     public void visualizar() {
         int elapsedTime = millis() - startTime; // Tiempo transcurrido en milisegundos
@@ -59,24 +56,12 @@ class PantallaEscenario extends Pantalla {
 
         background(fondo);
 
-        fill(200);
-        textAlign(CENTER);
-        textSize(35);
-        text("Puntaje: " + jugador.getPuntaje(), width / 2, 30);
-
-        fill(200);
-        textAlign(CENTER);
-        textSize(35);
-        text("Energia vital " + jugador.getVidas(), width / 2, 60);
-
-        fill(200);
-        textAlign(CENTER);
-        textSize(45);
-        text("Tiempo: " + remainingTime / 1000, width / 2, 100);
-
+        hud.visualizarInformacionDeJuego(remainingTime);
+        hud.mostrarPosicionPersonaje();
 
         jugador.moverConTeclado();
         jugador.display();
+
 
         // Dibujar y actualizar enemigos
         for (int i = enemigos.size() - 1; i >= 0; i--) {
@@ -86,21 +71,20 @@ class PantallaEscenario extends Pantalla {
             if (jugador.colisionaCon(enemigo.getColision())) {
                 jugador.disminuirVidas();
                 fill(255, 0, 0);
-                text("Colisión ok", width / 2, 200);
+                //text("Colisión ok", width / 2, 200);
                 if (jugador.getVidas() <= 0) {
                     pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.DERROTA, pantalla);
                     return; // Detener la ejecución si el jugador ha perdido todas las vidas
                 }
             }
-
             // Mostrar cantidad de clics restantes sobre el enemigo
             fill(200);
-            textSize(19);
+            textSize(16);
             textAlign(CENTER);
             text("Vidas: " + (5 - enemigo.getClickCount()), enemigo.getPosicion().x, enemigo.getPosicion().y - 30);
         } // fin for
 
-        // Verificar clics sobre enemigos
+        // Verificar clicks sobre enemigos
         if (mousePressed) {
             for (int i = enemigos.size() - 1; i >= 0; i--) {
                 Enemigo enemigo = enemigos.get(i);
@@ -120,7 +104,6 @@ class PantallaEscenario extends Pantalla {
             }
         }
 
-
         // Dibujar y actualizar MONEDAS
         for (int i = monedas.size() - 1; i >= 0; i--) {
             Moneda moneda = monedas.get(i);
@@ -130,8 +113,9 @@ class PantallaEscenario extends Pantalla {
                 jugador.sumarPuntajeMoneda();
             }
         } // fin for
-        dibujarExplosiones();
+        
         //mostrarPosicionPersonaje();
+        dibujarExplosiones();
     }
 
     // Si presiono la tecla espacio se lanza el proyectil

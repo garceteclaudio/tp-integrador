@@ -1,7 +1,6 @@
 class PantallaInicio extends Pantalla{
     private PImage fondo;
  
-    
     public PantallaInicio(int estado){
       super(estado);
       fondo = loadImage("/resources/images/inicio.png");
@@ -10,8 +9,6 @@ class PantallaInicio extends Pantalla{
 
   public void visualizar(){
       background(fondo);
-      
-
       
       fill(255); // Color blanco para el texto
       textAlign(CENTER);

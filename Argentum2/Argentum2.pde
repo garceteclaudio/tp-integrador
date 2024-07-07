@@ -33,7 +33,7 @@ void keyReleased() {
           pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.JUGANDO, pantalla);
       }
     }
-    /*
+    
     if (key == '3') {
         pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.DERROTA, pantalla);
     }
@@ -43,5 +43,5 @@ void keyReleased() {
     if (key == '1') {
         pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.INICIO, pantalla);
     }
-    */
+   
 }
