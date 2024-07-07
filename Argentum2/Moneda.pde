@@ -22,4 +22,8 @@ class Moneda implements IVisualizable {
     public Collider getColision() {
         return this.colision;
     }
+
+    public PVector getPosicion() {
+        return objetoTransform.getPosition();
+    }
 }
