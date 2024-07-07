@@ -61,6 +61,10 @@ class Personaje implements IVisualizable, IMoveable {
     public void sumarPuntaje(){
         this.puntaje = this.puntaje + 10;
     }
+
+    public void sumarPuntajeMoneda(){
+        this.puntaje = this.puntaje + 25;
+    }
     /*
         Operacion utilizada para el control del personaje mediante teclas.
     */

@@ -1,9 +1,9 @@
 class PantallaEscenario extends Pantalla {
     private PImage fondo;
+    private ArrayList<Moneda> monedas;
     private Personaje jugador;
     private ArrayList<Enemigo> enemigos;
     ArrayList<Explosion> explosiones;
-    Enemigo enemigoDragon;
     private int startTime;
     private MaquinaDeEstadosPantallas maquinaDeEstados;
 
@@ -13,7 +13,14 @@ class PantallaEscenario extends Pantalla {
         startTime = millis(); // Tiempo de inicio en milisegundos
         fondo = loadImage("/resources/images/fondo2.jpg");
 
+
         jugador = new Personaje(new PVector(100, 100), "/resources/images/mago.png");
+
+        monedas = new ArrayList<Moneda>();
+        for (int i = 0; i < 7; i++) {
+            monedas.add(new Moneda(new PVector(random(width), random(height)), "/resources/images/oro.png"));
+        }
+        
         enemigos = new ArrayList<Enemigo>();
         for (int i = 0; i < 3; i++) {
             enemigos.add(new Enemigo(new PVector(random(width), random(height)), "/resources/images/zombie3.png"));
@@ -26,7 +33,6 @@ class PantallaEscenario extends Pantalla {
         }
 
         explosiones = new ArrayList<>();
-        enemigoDragon = new Enemigo(new PVector(random(width), random(height)), "/resources/images/dragon.png");
     }
 
     void dibujarExplosiones() {
@@ -46,61 +52,31 @@ class PantallaEscenario extends Pantalla {
     public void visualizar() {
         int elapsedTime = millis() - startTime; // Tiempo transcurrido en milisegundos
         int remainingTime = 30000 - elapsedTime; // 30 segundos menos el tiempo transcurrido
-
-        background(fondo);
-
-        fill(200);
-        textAlign(CENTER);
-        textSize(20);
-        text("Tiempo restante de juego: " + remainingTime / 1000, 130, 30);
-
         if (remainingTime <= 0) {
             pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.DERROTA, pantalla);
             return; // No ejecutar más código si el tiempo se ha agotado
         }
 
-        fill(200);
-        textAlign(CENTER);
-        textSize(20);
-        text("Energia vital " + jugador.getVidas(), 130, 50);
+        background(fondo);
 
         fill(200);
         textAlign(CENTER);
-        textSize(20);
-        text("Puntaje: " + jugador.getPuntaje(), 130, 70);
-
+        textSize(35);
+        text("Puntaje: " + jugador.getPuntaje(), width / 2, 30);
 
         fill(200);
-        textSize(24);
-        text("Se encuentra jugando", width / 2, 20);
-        text("Presione 3 para derrota", width / 2, 40);
-        text("Presione 4 para victoria", width / 2, 60);
+        textAlign(CENTER);
+        textSize(35);
+        text("Energia vital " + jugador.getVidas(), width / 2, 60);
+
+        fill(200);
+        textAlign(CENTER);
+        textSize(45);
+        text("Tiempo: " + remainingTime / 1000, width / 2, 100);
+
 
         jugador.moverConTeclado();
         jugador.display();
-
-        enemigoDragon.display();
-        enemigoDragon.actualizar();
-        if (jugador.colisionaCon(enemigoDragon.getColision())) {
-            jugador.disminuirVidas();
-            fill(255, 0, 0);
-            text("Colisión con dragon ok", width / 2, 200);
-            if (jugador.getVidas() <= 0) {
-                pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.DERROTA, pantalla);
-                return; // Detener la ejecución si el jugador ha perdido todas las vidas
-            }
-        }
-
-        // Verificar clicks sobre enemigo dragon
-        if (mousePressed) {
-            if (enemigoDragon.getColision().validarColision(new Collider(1, 1, new PVector(mouseX, mouseY)))) {
-                if (enemigoDragon.puedeRegistrarClick()) {
-                    enemigoDragon.registrarClick();
-                    enemigoDragon.aumentarClickCount();
-                    print("Click numero" + enemigoDragon.getClickCount() + "\n");
-                }
-            }
-        }
 
         // Dibujar y actualizar enemigos
         for (int i = enemigos.size() - 1; i >= 0; i--) {
@@ -122,7 +98,7 @@ class PantallaEscenario extends Pantalla {
             textSize(19);
             textAlign(CENTER);
             text("Vidas: " + (5 - enemigo.getClickCount()), enemigo.getPosicion().x, enemigo.getPosicion().y - 30);
-        }
+        } // fin for
 
         // Verificar clics sobre enemigos
         if (mousePressed) {
@@ -133,10 +109,8 @@ class PantallaEscenario extends Pantalla {
                         enemigo.registrarClick();
                         enemigo.aumentarClickCount();
                         print("Click numero" + enemigo.getClickCount() + "\n");
-
                         // Crear una nueva explosión en la posición del enemigo clicado
                         explosiones.add(new Explosion(enemigo.getPosicion().x, enemigo.getPosicion().y));
-
                         if (enemigo.getClickCount() >= 5) {
                             enemigos.remove(i);
                             jugador.sumarPuntaje();
@@ -146,8 +120,18 @@ class PantallaEscenario extends Pantalla {
             }
         }
 
+
+        // Dibujar y actualizar MONEDAS
+        for (int i = monedas.size() - 1; i >= 0; i--) {
+            Moneda moneda = monedas.get(i);
+            moneda.display();
+            if (jugador.colisionaCon(moneda.getColision())) {
+                monedas.remove(i);
+                jugador.sumarPuntajeMoneda();
+            }
+        } // fin for
         dibujarExplosiones();
-        mostrarPosicionPersonaje();
+        //mostrarPosicionPersonaje();
     }
 
     // Si presiono la tecla espacio se lanza el proyectil
