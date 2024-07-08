@@ -1,2 +1,1 @@
-Puntaje: 10
-Puntaje: 175
+Puntaje: 0

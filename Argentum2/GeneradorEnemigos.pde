@@ -2,8 +2,11 @@ class GeneradorEnemigos{
 
     private ArrayList<Enemigo> enemigos;
     private ArrayList<Explosion> explosiones;
+    private GuardarInformacion guardarInfor;
 
     public GeneradorEnemigos(){
+        guardarInfor = new GuardarInformacion();
+
         enemigos = new ArrayList<Enemigo>();
         for (int i = 0; i < 3; i++) {
             enemigos.add(new Enemigo(new PVector(random(width), random(height)), "/resources/images/zombie3.png"));
@@ -24,7 +27,7 @@ class GeneradorEnemigos{
         }
     }
 
-    public ArrayList<String>  dibujarYActualizarEnemigos(Personaje jugador, float deltaTime,ArrayList<String> lineas){
+    public ArrayList<String> dibujarYActualizarEnemigos(Personaje jugador, float deltaTime,ArrayList<String> lineas){
         for (int i = enemigos.size() - 1; i >= 0; i--) {
             Enemigo enemigo = enemigos.get(i);
             enemigo.display();
@@ -35,7 +38,7 @@ class GeneradorEnemigos{
                 if (jugador.getVidas() <= 0) {
                     pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.DERROTA, pantalla);
                     lineas.add("Puntaje: " + jugador.getPuntaje());
-                    //saveArrayListToFile(lineas, "data/miarchivo.txt");
+                    guardarInfor.saveArrayListToFile(lineas, "data/miarchivo.txt");
                     return lineas;
                 }
             }
@@ -66,27 +69,5 @@ class GeneradorEnemigos{
         return lineas;
     }// fin metodo
 
-    void saveArrayListToFile(ArrayList<String> arrayList, String fileName) {
-        PrintWriter output = createWriter(fileName);
-        for (String linea : arrayList) {
-            output.println(linea);
-        }
-        output.flush();
-        output.close();
-    }
 
-    ArrayList<String> readArrayListFromFile(String fileName) {
-        ArrayList<String> arrayList = new ArrayList<String>();
-        BufferedReader reader = createReader(fileName);
-        String linea;
-        try {
-            while ((linea = reader.readLine()) != null) {
-                arrayList.add(linea);
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return arrayList;
-    }
 }
