@@ -1,3 +1,8 @@
+import ddf.minim.*;
+import processing.sound.*;
+
+Minim minim;
+AudioPlayer player;
 private Pantalla pantalla;
 private MaquinaDeEstadosPantallas maquinaDeEstados;
 
@@ -6,10 +11,13 @@ void setup() {
     size(900, 700);
     maquinaDeEstados = new MaquinaDeEstadosPantallas();
     pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.INICIO, pantalla);
+    minim = new Minim(this);
+    player = minim.loadFile("data/dv.mid");
     
 }
 
 void draw() {
+    player.play(); 
     float deltaTime = Time.getDeltaTime(frameRate);
     // metodo polimorfico
     pantalla.visualizar(deltaTime);

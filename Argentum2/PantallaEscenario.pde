@@ -31,7 +31,7 @@ class PantallaEscenario extends Pantalla {
 
     public void visualizar(float deltaTime) {
         int elapsedTime = millis() - startTime; // Tiempo transcurrido en milisegundos
-        int remainingTime = 11000 - elapsedTime; // 45 segundos menos el tiempo transcurrido
+        int remainingTime = 35000 - elapsedTime; // 35 segundos menos el tiempo transcurrido
 
         if (remainingTime <= 0) {
             pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.VICTORIA, pantalla);

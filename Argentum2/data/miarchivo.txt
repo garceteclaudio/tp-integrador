@@ -1,2 +1,6 @@
 Puntaje: 10
 Puntaje: 175
+Puntaje: 80
+Puntaje: 105
+Puntaje: 70
+Puntaje: 120
