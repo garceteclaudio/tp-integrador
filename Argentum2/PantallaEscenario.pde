@@ -2,7 +2,6 @@ import java.io.*;
 
 class PantallaEscenario extends Pantalla {
     ArrayList<String> lineas = new ArrayList<String>();
-
     private PImage fondo;
     private GeneradorMonedas generadorMonedas;
     private GeneradorEnemigos generadorEnemigos;

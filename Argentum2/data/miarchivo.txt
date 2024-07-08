@@ -4,3 +4,8 @@ Puntaje: 80
 Puntaje: 105
 Puntaje: 70
 Puntaje: 120
+Puntaje: 230
+Puntaje: 135
+Puntaje: 0
+Puntaje: 300
+Puntaje: 70

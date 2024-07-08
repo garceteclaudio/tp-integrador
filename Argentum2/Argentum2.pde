@@ -3,9 +3,9 @@ import processing.sound.*;
 
 Minim minim;
 AudioPlayer player;
+
 private Pantalla pantalla;
 private MaquinaDeEstadosPantallas maquinaDeEstados;
-
 
 void setup() {
     size(900, 700);
@@ -45,6 +45,14 @@ void keyReleased() {
       }
     }
     
+    if (pantalla.estado == MaquinaDeEstadosPantallas.DERROTA || pantalla.estado == MaquinaDeEstadosPantallas.VICTORIA) { 
+      if (key == '1') {
+          pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.INICIO, pantalla);
+      }
+    }
+    
+    /// Pruebo si las pantallas funcionan
+    /*
     if (key == '3') {
         pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.DERROTA, pantalla);
     }
@@ -54,5 +62,5 @@ void keyReleased() {
     if (key == '1') {
         pantalla = maquinaDeEstados.cambiarEstado(MaquinaDeEstadosPantallas.INICIO, pantalla);
     }
-   
+   */
 }

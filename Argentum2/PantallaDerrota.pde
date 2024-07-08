@@ -1,5 +1,4 @@
 class PantallaDerrota extends Pantalla {
-    private ArrayList<String> puntajes;
     private PImage fondo;
 
     public PantallaDerrota(int estado) {
